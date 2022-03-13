@@ -12,35 +12,29 @@ class Database:
     def create_db(self):
         Base.metadata.create_all(self.engine)
 
-    def connect(self):
-        pass
+    def add(self, data):
+        try:
+            match data['table']:
+                case 'shopping_list':
+                    record = ShoppingList(date=data['date'])
+                case 'store':
+                    record = Store(name=data['store'], location=data['location'])
+                case 'brand':
+                    record = Brand(name=data['brand'])
+                case 'item':
+                    record = Item(name=data['item'], brand_id=data['brand'], size=data['size'], expected_cost=['cost'])
+                case 'shopping_list_item':
+                    record = ShoppingListItem(shopping_list_id=data['list'], item_id=data['item'], quantity=data['quantity'], store_id=data['store'])
+                case _:
+                   return
+        except KeyError as err:
+            print(f'The following data was not provided: {err}')
+            return
 
-    def add_shopping_list(self, date):
+        # record.add(self.engine, data)
         with Session(self.engine) as session:
-            shopping_list = ShoppingList(date=date)
-            session.add(shopping_list)
+            session.add(record)
             session.commit()
-
-    def add_store(self, store, location=None):
-        with Session(self.engine) as session:
-            store = Store(name=store, location=location)
-            session.add(store)
-            session.commit()
-
-    def add_brand(self, brand):
-        with Session(self.engine) as session:
-            brand = Brand(name=brand)
-            session.add(brand)
-            session.commit()
-
-    def add_item(self, item, brand=None, size=None, cost=None):
-        with Session(self.engine) as session:
-            item = Item(name=item, brand_id=brand, size=size, expected_cost=cost)
-            session.add(item)
-            session.commit()
-
-    def add_shopping_list_item(self):
-        pass
 
 
 class ShoppingList(Base):
@@ -92,7 +86,7 @@ class Item(Base):
 
 
 class ShoppingListItem(Base):
-    __tablename__ = 'shopping_list_base'
+    __tablename__ = 'shopping_list_item'
 
     shopping_list_id = Column(Integer, ForeignKey('shopping_list.id'), primary_key=True)
     item_id = Column(Integer, ForeignKey('item.id'), primary_key=True)
