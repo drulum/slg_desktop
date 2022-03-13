@@ -1,18 +1,46 @@
 from sqlalchemy import Column, create_engine, ForeignKey, Integer, Float, String
-from sqlalchemy.orm import declarative_base, relationship
+from sqlalchemy.orm import declarative_base, relationship, Session
 
 Base = declarative_base()
 
 
-# class Database:
-#
-    # def __init__(self) -> None:
-    #     self.engine = create_engine('sqlite:///:memory', echo=True, future=True)
-    #
-    # def connect(self):
-        # with self.engine.connect() as conn:
-        #     result = conn.execute(text("select 'hello world'"))
-        #     print(result.all())
+class Database:
+
+    def __init__(self) -> None:
+        self.engine = create_engine('sqlite:///slg.sqlite3', echo=True, future=True)
+
+    def create_db(self):
+        Base.metadata.create_all(self.engine)
+
+    def connect(self):
+        pass
+
+    def add_shopping_list(self, date):
+        with Session(self.engine) as session:
+            shopping_list = ShoppingList(date=date)
+            session.add(shopping_list)
+            session.commit()
+
+    def add_store(self, store, location=None):
+        with Session(self.engine) as session:
+            store = Store(name=store, location=location)
+            session.add(store)
+            session.commit()
+
+    def add_brand(self, brand):
+        with Session(self.engine) as session:
+            brand = Brand(name=brand)
+            session.add(brand)
+            session.commit()
+
+    def add_item(self, item, brand=None, size=None, cost=None):
+        with Session(self.engine) as session:
+            item = Item(name=item, brand_id=brand, size=size, expected_cost=cost)
+            session.add(item)
+            session.commit()
+
+    def add_shopping_list_item(self):
+        pass
 
 
 class ShoppingList(Base):
@@ -52,7 +80,7 @@ class Item(Base):
     __tablename__ = 'item'
 
     id = Column(Integer, primary_key=True)
-    brand_id = Column(Integer, ForeignKey('brand.id'))
+    brand_id = Column(Integer, ForeignKey('brand.id'), nullable=True)
     name = Column(String, nullable=False)
     size = Column(String)
     expected_cost = Column(Float)
