@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Float, ForeignKey, Integer, String
+from sqlalchemy import Column, Date, Float, ForeignKey, Integer, String
 from sqlalchemy.orm import declarative_base, relationship
 
 Base = declarative_base()
@@ -8,8 +8,7 @@ class ShoppingList(Base):
     __tablename__ = 'shopping_list'
 
     id = Column(Integer, primary_key=True)
-    for_date = Column(String, nullable=False)  # Change type from String to Date
-
+    for_date = Column(Date, nullable=False)
     def __repr__(self) -> str:
         return f'Shopping list(id={self.id!r}, for_date={self.for_date!r})'
 

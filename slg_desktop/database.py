@@ -1,3 +1,4 @@
+from datetime import date
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
@@ -16,7 +17,7 @@ class Database:
         try:
             match data['table']:
                 case 'shopping_list':
-                    record = ShoppingList(for_date=data['date'])
+                    record = ShoppingList(for_date=date.fromisoformat(data['date']))
                 case 'store':
                     record = Store(name=data['store'], location=data['location'])
                 case 'brand':
