@@ -8,7 +8,7 @@ class ShoppingList(Base):
     __tablename__ = 'shopping_list'
 
     id = Column(Integer, primary_key=True)
-    for_date = Column(Date, nullable=False)
+    for_date = Column(Date, nullable=False)  # TODO: make field unique
     def __repr__(self) -> str:
         return f'Shopping list(id={self.id!r}, for_date={self.for_date!r})'
 

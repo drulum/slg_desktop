@@ -27,8 +27,9 @@ class Database:
                 case 'shopping_list_item':
                     record = ShoppingListItem(shopping_list_id=data['list'], item_id=data['item'], quantity=data['quantity'], store_id=data['store'])
                 case _:
-                   return
+                   return  # TODO: change to something more useful
         except KeyError as err:
+            # TODO: change to something more useful
             print(f'The following data was not provided: {err}')
             return
 
@@ -37,8 +38,43 @@ class Database:
             session.commit()
 
     def update(self, data):
-        pass
+        try:
+            match data['table']:
+                case 'shopping_list':
+                    pass
+                case 'store':
+                    pass
+                case 'brand':
+                    pass
+                case 'item':
+                    pass
+                case 'shopping_list_item':
+                    pass
+                case _:
+                    return  # TODO: change to something more useful
+        except KeyError as err:
+            # TODO: change to something more useful
+            print(f'The following data was not provided: {err}')
+            return
+
 
     def delete(self, data):
-        pass
+        try:
+            match data['table']:
+                case 'shopping_list':
+                    pass
+                case 'store':
+                    pass
+                case 'brand':
+                    pass
+                case 'item':
+                    pass
+                case 'shopping_list_item':
+                    pass
+                case _:
+                    return  # TODO: change to something more useful
+        except KeyError as err:
+            # TODO: change to something more useful
+            print(f'The following data was not provided: {err}')
+            return
 
