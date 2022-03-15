@@ -28,8 +28,9 @@ class Database:
                     case 'shopping_list_item':
                         record = ShoppingListItem(shopping_list_id=data['list'], item_id=data['item'], quantity=data['quantity'], store_id=data['store'])
                     case _:
-                       print('The table supplied does not exist.')
-                       return  # TODO: change to something more useful
+                        # TODO: change to something more useful
+                        print('The table supplied does not exist.')
+                        return
                 session.add(record)
                 session.commit()
         except KeyError as err:
@@ -38,19 +39,42 @@ class Database:
 
     def update(self, data):
         try:
-            match data['table']:
-                case 'shopping_list':
-                    pass
-                case 'store':
-                    pass
-                case 'brand':
-                    pass
-                case 'item':
-                    pass
-                case 'shopping_list_item':
-                    pass
-                case _:
-                    return  # TODO: change to something more useful
+            with Session(self.engine) as session:
+                match data['table']:
+                    case 'shopping_list':
+                        # pass
+                        record = session.get(ShoppingList, data['shopping_list_id'])
+                        record.for_date = data['date']
+                    case 'store':
+                        record = session.get(Store, data['store_id'])
+                        if 'name' in data:
+                            record.name = data['store']
+                        if 'location' in data:
+                            record.location = data['location']
+                    case 'brand':
+                        record = session.get(Brand, data['brand_id'])
+                        record.name = data['brand']
+                    case 'item':
+                        record = session.get(Item, data['item_id'])
+                        if 'brand_id' in data:
+                            record.brand_id = data['brand_id']
+                        if 'name' in data:
+                            record.name = data['item']
+                        if 'size' in data:
+                            record.size = data['size']
+                        if 'cost' in data:
+                            record.expected_cost = data['cost']
+                    case 'shopping_list_item':
+                        record = session.get(ShoppingListItem, (data['shopping_list_id'], data['item_id']))
+                        if 'quantity' in data:
+                            record.quantity = data['quantity']
+                        if 'store_id' in data:
+                            record.store_id = data['store_id']
+                    case _:
+                        # TODO: change to something more useful
+                        print('The table supplied does not exist.')
+                        return
+                session.commit()
         except KeyError as err:
             # TODO: change to something more useful
             print(f'The following data was not provided: {err}')
@@ -72,8 +96,9 @@ class Database:
                     case 'shopping_list_item':
                         record = session.get(ShoppingListItem, (data['shopping_list_id'], data['item_id']))
                     case _:
+                        # TODO: change to something more useful
                         print('The table supplied does not exist.')
-                        return  # TODO: change to something more useful
+                        return
                 session.delete(record)
                 session.commit()
         except KeyError as err:
