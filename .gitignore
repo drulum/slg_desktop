@@ -1,6 +1,7 @@
 # My own additions
 *.sqlite3
 tags*
+.env
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
