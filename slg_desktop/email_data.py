@@ -24,13 +24,13 @@ class ConstructEmail():
         # TODO: write method once the format of the file is designed
         pass
 
-    def send(self):
+    def send(self, for_date):
         context = ssl.create_default_context()
         with smtplib.SMTP_SSL(self.email_config['host'], self.email_config['port'], context=context) as server:
             server.login(self.email_config['user'], self.email_config['pass'])
             msg = EmailMessage()
-            msg.set_content(self.email_config['message'])  # may need to add .format(date=<variable passed for shopping list date>)
-            msg['Subject'] = self.email_config['subject']  # may need to add .format(date=<variable passed for shopping list date>)
+            msg.set_content(self.email_config['message'].format(date=for_date))
+            msg['Subject'] = self.email_config['subject'].format(date=for_date)
             msg['From'] = self.email_config['from']
             msg['To'] = self.email_config['to']
             # TODO: don't forget to attach the data file here
