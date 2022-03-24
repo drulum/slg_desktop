@@ -1,5 +1,5 @@
 # My own additions
-*.sqlite3
+*sqlite3*
 tags*
 .env
 

@@ -3,6 +3,8 @@ from sqlalchemy.orm import declarative_base, relationship
 
 Base = declarative_base()
 
+# TODO: Learn ALembic and implement a schema update option without data loss.
+
 
 class ShoppingList(Base):
     __tablename__ = 'shopping_list'
