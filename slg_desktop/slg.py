@@ -93,6 +93,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.brands_window.show()
 
 
+class ShoppingListGenerator:
+
+    def __init__(self):
+        pass
+
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = MainWindow()
