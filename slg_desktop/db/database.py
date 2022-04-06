@@ -2,7 +2,7 @@ from datetime import date
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
-from models import Base, Brand, Item, ShoppingList, ShoppingListItem, Store
+from db.models import Base, Brand, Item, ShoppingList, ShoppingListItem, Store
 
 
 class Database:
