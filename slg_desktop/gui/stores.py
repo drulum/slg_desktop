@@ -1,5 +1,5 @@
 from PySide6.QtSql import QSqlDatabase, QSqlTableModel
-from PySide6.QtWidgets import QMainWindow
+from PySide6.QtWidgets import QHeaderView, QMainWindow
 
 from gui.Stores import Ui_StoresWindow
 
@@ -20,6 +20,8 @@ class StoresWindow(QMainWindow, Ui_StoresWindow):
         self.model.setTable('store')
         self.storeView.setModel(self.model)
         self.storeView.hideColumn(0)
+        header = self.storeView.horizontalHeader()
+        header.setSectionResizeMode(QHeaderView.Stretch)
         self.model.select()
 
     def add_record(self):
