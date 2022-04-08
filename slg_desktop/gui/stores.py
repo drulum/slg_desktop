@@ -16,6 +16,7 @@ class StoresWindow(QMainWindow, Ui_StoresWindow):
         self.storeEdit.textChanged.connect(self.store_change)
         self.addButton.clicked.connect(self.add_record)
         self.cancelButton.clicked.connect(self.cancel_add)
+        self.deleteButton.clicked.connect(self.delete)
         self.model = QSqlTableModel(db=db)
         self.model.setTable('store')
         self.storeView.setModel(self.model)
@@ -35,6 +36,13 @@ class StoresWindow(QMainWindow, Ui_StoresWindow):
     def cancel_add(self):
         self.storeEdit.setText('')
         self.locationEdit.setText('')
+
+    def delete(self):
+        indexes = self.storeView.selectedIndexes()
+        if indexes:
+            index = indexes[0]
+            self.model.removeRow(index.row())
+            self.model.select()
 
     def store_change(self):
         if self.storeEdit.text():
