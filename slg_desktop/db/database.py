@@ -8,7 +8,7 @@ from db.models import Base, Brand, Item, ShoppingList, ShoppingListItem, Store
 class Database:
 
     def __init__(self) -> None:
-        self.engine = create_engine('sqlite:///slg.sqlite3', echo=True, future=True)
+        self.engine = create_engine('sqlite:///slg.sqlite3', future=True)
 
     def create_db(self):
         Base.metadata.create_all(self.engine)
