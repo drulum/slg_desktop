@@ -1,3 +1,4 @@
+from PySide6.QtCore import Qt
 from PySide6.QtSql import QSqlDatabase, QSqlTableModel
 from PySide6.QtWidgets import QHeaderView, QMainWindow
 
@@ -19,6 +20,7 @@ class StoresWindow(QMainWindow, Ui_StoresWindow):
         self.deleteButton.clicked.connect(self.delete)
         self.model = QSqlTableModel(db=db)
         self.model.setTable('store')
+        self.model.setSort(1, Qt.AscendingOrder)
         self.storeView.setModel(self.model)
         self.storeView.hideColumn(0)
         header = self.storeView.horizontalHeader()
@@ -38,9 +40,8 @@ class StoresWindow(QMainWindow, Ui_StoresWindow):
         self.locationEdit.setText('')
 
     def delete(self):
-        indexes = self.storeView.selectedIndexes()
-        if indexes:
-            index = indexes[0]
+        index = self.storeView.currentIndex()
+        if index:
             self.model.removeRow(index.row())
             self.model.select()
 
