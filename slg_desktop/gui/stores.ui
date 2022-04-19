@@ -24,7 +24,7 @@
     <item>
      <widget class="QTableView" name="storeView">
       <property name="statusTip">
-       <string>Select the store to display and edit the name &amp; location.</string>
+       <string>Double click the field to edit it.</string>
       </property>
       <property name="alternatingRowColors">
        <bool>true</bool>
@@ -56,6 +56,9 @@
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="statusTip">
+         <string>CAUTION: The selected store will be deleted.</string>
         </property>
         <property name="text">
          <string>Delete selected store</string>
@@ -109,6 +112,9 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
+           <property name="statusTip">
+            <string>Add a new store.</string>
+           </property>
            <property name="text">
             <string>Add</string>
            </property>
@@ -118,6 +124,9 @@
           <widget class="QPushButton" name="cancelButton">
            <property name="enabled">
             <bool>false</bool>
+           </property>
+           <property name="statusTip">
+            <string>Cancel the addition and reset the fields.</string>
            </property>
            <property name="text">
             <string>Cancel</string>

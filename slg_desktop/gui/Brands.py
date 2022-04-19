@@ -110,7 +110,7 @@ class Ui_BrandsWindow(object):
     def retranslateUi(self, BrandsWindow):
         BrandsWindow.setWindowTitle(QCoreApplication.translate("BrandsWindow", u"Add, Edit, Delete Brands", None))
 #if QT_CONFIG(statustip)
-        self.brandView.setStatusTip(QCoreApplication.translate("BrandsWindow", u"Select the brand to edit the name.", None))
+        self.brandView.setStatusTip(QCoreApplication.translate("BrandsWindow", u"Double click the field to edit it.", None))
 #endif // QT_CONFIG(statustip)
 #if QT_CONFIG(statustip)
         self.deleteButton.setStatusTip(QCoreApplication.translate("BrandsWindow", u"CAUTION: The selected brand will be deleted.", None))
@@ -125,6 +125,9 @@ class Ui_BrandsWindow(object):
         self.addButton.setStatusTip(QCoreApplication.translate("BrandsWindow", u"Add a new brand entry.", None))
 #endif // QT_CONFIG(statustip)
         self.addButton.setText(QCoreApplication.translate("BrandsWindow", u"Add", None))
+#if QT_CONFIG(statustip)
+        self.cancelButton.setStatusTip(QCoreApplication.translate("BrandsWindow", u"Cancel the addition and reset the fields.", None))
+#endif // QT_CONFIG(statustip)
         self.cancelButton.setText(QCoreApplication.translate("BrandsWindow", u"Cancel", None))
     # retranslateUi
 

@@ -124,13 +124,22 @@ class Ui_StoresWindow(object):
     def retranslateUi(self, StoresWindow):
         StoresWindow.setWindowTitle(QCoreApplication.translate("StoresWindow", u"Add, Edit, Delete Stores", None))
 #if QT_CONFIG(statustip)
-        self.storeView.setStatusTip(QCoreApplication.translate("StoresWindow", u"Select the store to display and edit the name & location.", None))
+        self.storeView.setStatusTip(QCoreApplication.translate("StoresWindow", u"Double click the field to edit it.", None))
+#endif // QT_CONFIG(statustip)
+#if QT_CONFIG(statustip)
+        self.deleteButton.setStatusTip(QCoreApplication.translate("StoresWindow", u"CAUTION: The selected store will be deleted.", None))
 #endif // QT_CONFIG(statustip)
         self.deleteButton.setText(QCoreApplication.translate("StoresWindow", u"Delete selected store", None))
         self.groupBox.setTitle(QCoreApplication.translate("StoresWindow", u"Add new store", None))
         self.label.setText(QCoreApplication.translate("StoresWindow", u"Store name", None))
         self.label_2.setText(QCoreApplication.translate("StoresWindow", u"Location", None))
+#if QT_CONFIG(statustip)
+        self.addButton.setStatusTip(QCoreApplication.translate("StoresWindow", u"Add a new store.", None))
+#endif // QT_CONFIG(statustip)
         self.addButton.setText(QCoreApplication.translate("StoresWindow", u"Add", None))
+#if QT_CONFIG(statustip)
+        self.cancelButton.setStatusTip(QCoreApplication.translate("StoresWindow", u"Cancel the addition and reset the fields.", None))
+#endif // QT_CONFIG(statustip)
         self.cancelButton.setText(QCoreApplication.translate("StoresWindow", u"Cancel", None))
     # retranslateUi
 

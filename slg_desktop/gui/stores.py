@@ -21,6 +21,8 @@ class StoresWindow(QMainWindow, Ui_StoresWindow):
         self.model = QSqlTableModel(db=db)
         self.model.setTable('store')
         self.model.setSort(1, Qt.AscendingOrder)
+        self.model.setHeaderData(1, Qt.Horizontal, 'Store name')
+        self.model.setHeaderData(2, Qt.Horizontal, 'Location')
         self.storeView.setModel(self.model)
         self.storeView.hideColumn(0)
         header = self.storeView.horizontalHeader()

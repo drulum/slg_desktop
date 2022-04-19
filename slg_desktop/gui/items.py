@@ -16,7 +16,7 @@ class ItemsWindow(QMainWindow, Ui_ItemsWindow):
         'category_id': 'Category',
         'name': 'Item name',
         'size': 'Size',
-        'expected_cost': 'Expected Cost'
+        'expected_cost': 'Expected cost'
     }
 
     def __init__(self):

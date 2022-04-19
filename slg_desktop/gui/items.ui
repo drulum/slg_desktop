@@ -16,7 +16,11 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_4">
     <item>
-     <widget class="QTableView" name="itemView"/>
+     <widget class="QTableView" name="itemView">
+      <property name="statusTip">
+       <string>Double click the field to edit it.</string>
+      </property>
+     </widget>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
@@ -35,6 +39,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="deleteButton">
+        <property name="statusTip">
+         <string>CAUTION: The selected item will be deleted.</string>
+        </property>
         <property name="text">
          <string>Delete selected item</string>
         </property>
@@ -109,6 +116,9 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
+           <property name="statusTip">
+            <string>Add a new item.</string>
+           </property>
            <property name="text">
             <string>Add</string>
            </property>
@@ -118,6 +128,9 @@
           <widget class="QPushButton" name="cancelButton">
            <property name="enabled">
             <bool>false</bool>
+           </property>
+           <property name="statusTip">
+            <string>Cancel the addition and reset the fields.</string>
            </property>
            <property name="text">
             <string>Cancel</string>
@@ -143,6 +156,17 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <tabstops>
+  <tabstop>itemView</tabstop>
+  <tabstop>deleteButton</tabstop>
+  <tabstop>brandBox</tabstop>
+  <tabstop>categoryBox</tabstop>
+  <tabstop>itemEdit</tabstop>
+  <tabstop>sizeEdit</tabstop>
+  <tabstop>costEdit</tabstop>
+  <tabstop>addButton</tabstop>
+  <tabstop>cancelButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

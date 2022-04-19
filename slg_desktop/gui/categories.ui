@@ -20,7 +20,7 @@
       <item>
        <widget class="QTableView" name="categoryView">
         <property name="statusTip">
-         <string>Select the category to edit the name.</string>
+         <string>Double click the field to edit it.</string>
         </property>
        </widget>
       </item>
@@ -96,6 +96,9 @@
           <widget class="QPushButton" name="cancelButton">
            <property name="enabled">
             <bool>false</bool>
+           </property>
+           <property name="statusTip">
+            <string>Cancel the addition and reset the fields.</string>
            </property>
            <property name="text">
             <string>Cancel</string>

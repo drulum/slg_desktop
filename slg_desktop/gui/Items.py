@@ -136,6 +136,14 @@ class Ui_ItemsWindow(object):
         self.statusbar = QStatusBar(ItemsWindow)
         self.statusbar.setObjectName(u"statusbar")
         ItemsWindow.setStatusBar(self.statusbar)
+        QWidget.setTabOrder(self.itemView, self.deleteButton)
+        QWidget.setTabOrder(self.deleteButton, self.brandBox)
+        QWidget.setTabOrder(self.brandBox, self.categoryBox)
+        QWidget.setTabOrder(self.categoryBox, self.itemEdit)
+        QWidget.setTabOrder(self.itemEdit, self.sizeEdit)
+        QWidget.setTabOrder(self.sizeEdit, self.costEdit)
+        QWidget.setTabOrder(self.costEdit, self.addButton)
+        QWidget.setTabOrder(self.addButton, self.cancelButton)
 
         self.retranslateUi(ItemsWindow)
 
@@ -144,6 +152,12 @@ class Ui_ItemsWindow(object):
 
     def retranslateUi(self, ItemsWindow):
         ItemsWindow.setWindowTitle(QCoreApplication.translate("ItemsWindow", u"Add, Edit, Delete Items", None))
+#if QT_CONFIG(statustip)
+        self.itemView.setStatusTip(QCoreApplication.translate("ItemsWindow", u"Double click the field to edit it.", None))
+#endif // QT_CONFIG(statustip)
+#if QT_CONFIG(statustip)
+        self.deleteButton.setStatusTip(QCoreApplication.translate("ItemsWindow", u"CAUTION: The selected item will be deleted.", None))
+#endif // QT_CONFIG(statustip)
         self.deleteButton.setText(QCoreApplication.translate("ItemsWindow", u"Delete selected item", None))
         self.groupBox.setTitle(QCoreApplication.translate("ItemsWindow", u"Add a new item", None))
         self.label.setText(QCoreApplication.translate("ItemsWindow", u"Brand", None))
@@ -151,7 +165,13 @@ class Ui_ItemsWindow(object):
         self.label_2.setText(QCoreApplication.translate("ItemsWindow", u"Category", None))
         self.label_4.setText(QCoreApplication.translate("ItemsWindow", u"Size", None))
         self.label_5.setText(QCoreApplication.translate("ItemsWindow", u"Expected cost", None))
+#if QT_CONFIG(statustip)
+        self.addButton.setStatusTip(QCoreApplication.translate("ItemsWindow", u"Add a new item.", None))
+#endif // QT_CONFIG(statustip)
         self.addButton.setText(QCoreApplication.translate("ItemsWindow", u"Add", None))
+#if QT_CONFIG(statustip)
+        self.cancelButton.setStatusTip(QCoreApplication.translate("ItemsWindow", u"Cancel the addition and reset the fields.", None))
+#endif // QT_CONFIG(statustip)
         self.cancelButton.setText(QCoreApplication.translate("ItemsWindow", u"Cancel", None))
     # retranslateUi
 

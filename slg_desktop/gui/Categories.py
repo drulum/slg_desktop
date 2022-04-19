@@ -109,7 +109,7 @@ class Ui_CategoriesWindow(object):
     def retranslateUi(self, CategoriesWindow):
         CategoriesWindow.setWindowTitle(QCoreApplication.translate("CategoriesWindow", u"Add, Edit, Delete Categories", None))
 #if QT_CONFIG(statustip)
-        self.categoryView.setStatusTip(QCoreApplication.translate("CategoriesWindow", u"Select the category to edit the name.", None))
+        self.categoryView.setStatusTip(QCoreApplication.translate("CategoriesWindow", u"Double click the field to edit it.", None))
 #endif // QT_CONFIG(statustip)
 #if QT_CONFIG(statustip)
         self.deleteButton.setStatusTip(QCoreApplication.translate("CategoriesWindow", u"CAUTION: The selected category will be deleted.", None))
@@ -124,6 +124,9 @@ class Ui_CategoriesWindow(object):
         self.addButton.setStatusTip(QCoreApplication.translate("CategoriesWindow", u"Add a new category.", None))
 #endif // QT_CONFIG(statustip)
         self.addButton.setText(QCoreApplication.translate("CategoriesWindow", u"Add", None))
+#if QT_CONFIG(statustip)
+        self.cancelButton.setStatusTip(QCoreApplication.translate("CategoriesWindow", u"Cancel the addition and reset the fields.", None))
+#endif // QT_CONFIG(statustip)
         self.cancelButton.setText(QCoreApplication.translate("CategoriesWindow", u"Cancel", None))
     # retranslateUi
 

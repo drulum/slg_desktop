@@ -21,6 +21,7 @@ class BrandsWindow(QMainWindow, Ui_BrandsWindow):
         self.model = QSqlTableModel(db=db)
         self.model.setTable('brand')
         self.model.setSort(1, Qt.AscendingOrder)
+        self.model.setHeaderData(1, Qt.Horizontal, 'Brand name')
         self.brandView.setModel(self.model)
         self.brandView.hideColumn(0)
         header = self.brandView.horizontalHeader()

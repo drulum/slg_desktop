@@ -21,6 +21,7 @@ class CategoriesWindow(QMainWindow, Ui_CategoriesWindow):
         self.model = QSqlTableModel(db=db)
         self.model.setTable('category')
         self.model.setSort(1, Qt.AscendingOrder)
+        self.model.setHeaderData(1, Qt.Horizontal, 'Category name')
         self.categoryView.setModel(self.model)
         self.categoryView.hideColumn(0)
         header = self.categoryView.horizontalHeader()
