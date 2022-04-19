@@ -1,5 +1,5 @@
 from PySide6.QtCore import Qt
-from PySide6.QtSql import QSqlDatabase, QSqlQuery, QSqlQueryModel, QSqlTableModel
+from PySide6.QtSql import QSqlDatabase, QSqlRelation, QSqlRelationalDelegate, QSqlRelationalTableModel, QSqlTableModel
 from PySide6.QtWidgets import QHeaderView, QMainWindow
 
 from gui.Items import Ui_ItemsWindow
@@ -11,6 +11,14 @@ db.open()
 
 class ItemsWindow(QMainWindow, Ui_ItemsWindow):
 
+    column_titles = {
+        'brand_id': 'Brand',
+        'category_id': 'Category',
+        'name': 'Item name',
+        'size': 'Size',
+        'expected_cost': 'Expected Cost'
+    }
+
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -18,10 +26,16 @@ class ItemsWindow(QMainWindow, Ui_ItemsWindow):
         self.addButton.clicked.connect(self.add_item)
         self.cancelButton.clicked.connect(self.cancel_add)
         self.deleteButton.clicked.connect(self.delete)
-        self.model = QSqlTableModel(db=db)
+        self.model = QSqlRelationalTableModel(db=db)
         self.model.setTable('item')
+        self.model.setRelation(1, QSqlRelation('brand', 'id', 'name'))
+        self.model.setRelation(2, QSqlRelation('category', 'id', 'name'))
         self.model.setSort(3, Qt.AscendingOrder)
+        for original, replacement in self.column_titles.items():
+            index = self.model.fieldIndex(original)
+            self.model.setHeaderData(index, Qt.Horizontal, replacement)
         self.itemView.setModel(self.model)
+        self.itemView.setItemDelegate(QSqlRelationalDelegate(self.itemView))
         self.itemView.hideColumn(0)
         header = self.itemView.horizontalHeader()
         header.setSectionResizeMode(QHeaderView.Stretch)
@@ -41,9 +55,19 @@ class ItemsWindow(QMainWindow, Ui_ItemsWindow):
         self.categoryBox.setModelColumn(1)
         self.categories_model.select()
 
-        self.refresh_comboboxes()
-        
     def add_item(self):
+        record = self.model.record()
+        pk = self.brandBox.model().index(self.brandBox.currentIndex(), 0, self.brandBox.rootModelIndex())
+        record.setValue('brand_id', pk.data())
+        pk = self.categoryBox.model().index(self.categoryBox.currentIndex(), 0, self.categoryBox.rootModelIndex())
+        record.setValue('category_id', pk.data())
+        record.setValue('name', self.itemEdit.text())
+        record.setValue('size', self.sizeEdit.text())
+        record.setValue('expected_cost', self.costEdit.text())
+        self.model.insertRecord(-1, record)
+        self.model.select()
+        self.cancel_add()
+
         self.refresh_comboboxes()
 
     def refresh_comboboxes(self):
