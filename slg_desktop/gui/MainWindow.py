@@ -95,6 +95,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.brandsButton)
 
+        self.itemsButton = QPushButton(self.groupBox_2)
+        self.itemsButton.setObjectName(u"itemsButton")
+
+        self.horizontalLayout.addWidget(self.itemsButton)
+
 
         self.verticalLayout.addWidget(self.groupBox_2)
 
@@ -122,5 +127,6 @@ class Ui_MainWindow(object):
         self.storesButton.setText(QCoreApplication.translate("MainWindow", u"Stores", None))
         self.categoriesButton.setText(QCoreApplication.translate("MainWindow", u"Categories", None))
         self.brandsButton.setText(QCoreApplication.translate("MainWindow", u"Brands", None))
+        self.itemsButton.setText(QCoreApplication.translate("MainWindow", u"Items", None))
     # retranslateUi
 
