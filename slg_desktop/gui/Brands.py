@@ -116,7 +116,7 @@ class Ui_BrandsWindow(object):
         self.deleteButton.setStatusTip(QCoreApplication.translate("BrandsWindow", u"CAUTION: The selected brand will be deleted.", None))
 #endif // QT_CONFIG(statustip)
         self.deleteButton.setText(QCoreApplication.translate("BrandsWindow", u"Delete selected brand", None))
-        self.groupBox.setTitle(QCoreApplication.translate("BrandsWindow", u"GroupBox", None))
+        self.groupBox.setTitle(QCoreApplication.translate("BrandsWindow", u"Add brand", None))
         self.label.setText(QCoreApplication.translate("BrandsWindow", u"Brand name", None))
 #if QT_CONFIG(statustip)
         self.brandEdit.setStatusTip(QCoreApplication.translate("BrandsWindow", u"\"Tropicana\", \"Heinz\", \"Yeo Valley\" etc.", None))

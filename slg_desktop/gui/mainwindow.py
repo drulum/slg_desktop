@@ -5,6 +5,7 @@ from gui.MainWindow import Ui_MainWindow
 from gui.brands import BrandsWindow
 from gui.categories import CategoriesWindow
 from gui.items import ItemsWindow
+from gui.shoppinglist import ShoppingListWindow
 from gui.stores import StoresWindow
 
 
@@ -13,14 +14,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.shopping_list_window = ShoppingListWindow()
         self.stores_window = StoresWindow()
         self.categories_window = CategoriesWindow()
         self.brands_window = BrandsWindow()
         self.items_window = ItemsWindow()
+        self.shoppinglistsButton.clicked.connect(self.shopping_list_button)
         self.storesButton.clicked.connect(self.stores_button)
         self.categoriesButton.clicked.connect(self.categories_button)
         self.brandsButton.clicked.connect(self.brands_button)
         self.itemsButton.clicked.connect(self.items_button)
+
+    def shopping_list_button(self):
+        self.shopping_list_window.show()
 
     def stores_button(self):
         self.stores_window.show()

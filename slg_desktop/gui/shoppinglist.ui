@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>BrandsWindow</class>
- <widget class="QMainWindow" name="BrandsWindow">
+ <class>ShoppingListWindow</class>
+ <widget class="QMainWindow" name="ShoppingListWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -10,28 +10,22 @@
     <height>600</height>
    </rect>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>0</width>
-    <height>0</height>
-   </size>
-  </property>
   <property name="windowTitle">
-   <string>Add, Edit, Delete Brands</string>
+   <string>Add, Edit, Delete Shopping Lists</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QTableView" name="brandView">
+       <widget class="QTableView" name="shoppinglistView">
         <property name="statusTip">
          <string>Double click the field to edit it.</string>
         </property>
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
          <spacer name="horizontalSpacer">
           <property name="orientation">
@@ -48,10 +42,10 @@
         <item>
          <widget class="QPushButton" name="deleteButton">
           <property name="statusTip">
-           <string>CAUTION: The selected brand will be deleted.</string>
+           <string>CAUTION: The selected shopping list will be deleted.</string>
           </property>
           <property name="text">
-           <string>Delete selected brand</string>
+           <string>Delete selected shopping list</string>
           </property>
          </widget>
         </item>
@@ -62,7 +56,7 @@
     <item>
      <widget class="QGroupBox" name="groupBox">
       <property name="title">
-       <string>Add brand</string>
+       <string>Add shopping list</string>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
@@ -70,28 +64,38 @@
          <item>
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Brand name</string>
+            <string>Shopping list date</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="brandEdit">
-           <property name="statusTip">
-            <string>&quot;Tropicana&quot;, &quot;Heinz&quot;, &quot;Yeo Valley&quot; etc.</string>
+          <widget class="QDateEdit" name="shoppinglistEdit">
+           <property name="minimumDate">
+            <date>
+             <year>2022</year>
+             <month>4</month>
+             <day>1</day>
+            </date>
+           </property>
+           <property name="displayFormat">
+            <string>yyyy/MM/dd</string>
+           </property>
+           <property name="calendarPopup">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
           <widget class="QPushButton" name="addButton">
            <property name="enabled">
             <bool>false</bool>
            </property>
            <property name="statusTip">
-            <string>Add a new brand entry.</string>
+            <string>Add a new shopping list.</string>
            </property>
            <property name="text">
             <string>Add</string>

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'categories.ui'
+## Form generated from reading UI file 'shoppinglist.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.3
 ##
@@ -15,26 +15,26 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QGroupBox, QHBoxLayout, QHeaderView,
-    QLabel, QLineEdit, QMainWindow, QMenuBar,
+from PySide6.QtWidgets import (QApplication, QDateEdit, QGroupBox, QHBoxLayout,
+    QHeaderView, QLabel, QMainWindow, QMenuBar,
     QPushButton, QSizePolicy, QSpacerItem, QStatusBar,
     QTableView, QVBoxLayout, QWidget)
 
-class Ui_CategoriesWindow(object):
-    def setupUi(self, CategoriesWindow):
-        if not CategoriesWindow.objectName():
-            CategoriesWindow.setObjectName(u"CategoriesWindow")
-        CategoriesWindow.resize(400, 600)
-        self.centralwidget = QWidget(CategoriesWindow)
+class Ui_ShoppingListWindow(object):
+    def setupUi(self, ShoppingListWindow):
+        if not ShoppingListWindow.objectName():
+            ShoppingListWindow.setObjectName(u"ShoppingListWindow")
+        ShoppingListWindow.resize(400, 600)
+        self.centralwidget = QWidget(ShoppingListWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.categoryView = QTableView(self.centralwidget)
-        self.categoryView.setObjectName(u"categoryView")
+        self.shoppinglistView = QTableView(self.centralwidget)
+        self.shoppinglistView.setObjectName(u"shoppinglistView")
 
-        self.verticalLayout.addWidget(self.categoryView)
+        self.verticalLayout.addWidget(self.shoppinglistView)
 
         self.horizontalLayout_3 = QHBoxLayout()
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
@@ -64,10 +64,12 @@ class Ui_CategoriesWindow(object):
 
         self.horizontalLayout_2.addWidget(self.label)
 
-        self.categoryEdit = QLineEdit(self.groupBox)
-        self.categoryEdit.setObjectName(u"categoryEdit")
+        self.shoppinglistEdit = QDateEdit(self.groupBox)
+        self.shoppinglistEdit.setObjectName(u"shoppinglistEdit")
+        self.shoppinglistEdit.setMinimumDate(QDate(2022, 4, 1))
+        self.shoppinglistEdit.setCalendarPopup(True)
 
-        self.horizontalLayout_2.addWidget(self.categoryEdit)
+        self.horizontalLayout_2.addWidget(self.shoppinglistEdit)
 
 
         self.verticalLayout_3.addLayout(self.horizontalLayout_2)
@@ -92,41 +94,39 @@ class Ui_CategoriesWindow(object):
 
         self.verticalLayout_2.addWidget(self.groupBox)
 
-        CategoriesWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QMenuBar(CategoriesWindow)
+        ShoppingListWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QMenuBar(ShoppingListWindow)
         self.menubar.setObjectName(u"menubar")
         self.menubar.setGeometry(QRect(0, 0, 400, 23))
-        CategoriesWindow.setMenuBar(self.menubar)
-        self.statusbar = QStatusBar(CategoriesWindow)
+        ShoppingListWindow.setMenuBar(self.menubar)
+        self.statusbar = QStatusBar(ShoppingListWindow)
         self.statusbar.setObjectName(u"statusbar")
-        CategoriesWindow.setStatusBar(self.statusbar)
+        ShoppingListWindow.setStatusBar(self.statusbar)
 
-        self.retranslateUi(CategoriesWindow)
+        self.retranslateUi(ShoppingListWindow)
 
-        QMetaObject.connectSlotsByName(CategoriesWindow)
+        QMetaObject.connectSlotsByName(ShoppingListWindow)
     # setupUi
 
-    def retranslateUi(self, CategoriesWindow):
-        CategoriesWindow.setWindowTitle(QCoreApplication.translate("CategoriesWindow", u"Add, Edit, Delete Categories", None))
+    def retranslateUi(self, ShoppingListWindow):
+        ShoppingListWindow.setWindowTitle(QCoreApplication.translate("ShoppingListWindow", u"Add, Edit, Delete Shopping Lists", None))
 #if QT_CONFIG(statustip)
-        self.categoryView.setStatusTip(QCoreApplication.translate("CategoriesWindow", u"Double click the field to edit it.", None))
+        self.shoppinglistView.setStatusTip(QCoreApplication.translate("ShoppingListWindow", u"Double click the field to edit it.", None))
 #endif // QT_CONFIG(statustip)
 #if QT_CONFIG(statustip)
-        self.deleteButton.setStatusTip(QCoreApplication.translate("CategoriesWindow", u"CAUTION: The selected category will be deleted.", None))
+        self.deleteButton.setStatusTip(QCoreApplication.translate("ShoppingListWindow", u"CAUTION: The selected shopping list will be deleted.", None))
 #endif // QT_CONFIG(statustip)
-        self.deleteButton.setText(QCoreApplication.translate("CategoriesWindow", u"Delete selected category", None))
-        self.groupBox.setTitle(QCoreApplication.translate("CategoriesWindow", u"Add category", None))
-        self.label.setText(QCoreApplication.translate("CategoriesWindow", u"Category name", None))
+        self.deleteButton.setText(QCoreApplication.translate("ShoppingListWindow", u"Delete selected shopping list", None))
+        self.groupBox.setTitle(QCoreApplication.translate("ShoppingListWindow", u"Add shopping list", None))
+        self.label.setText(QCoreApplication.translate("ShoppingListWindow", u"Shopping list date", None))
+        self.shoppinglistEdit.setDisplayFormat(QCoreApplication.translate("ShoppingListWindow", u"yyyy/MM/dd", None))
 #if QT_CONFIG(statustip)
-        self.categoryEdit.setStatusTip(QCoreApplication.translate("CategoriesWindow", u"\"Fresh\", \"Chilled\", \"Baked Goods\" etc.", None))
+        self.addButton.setStatusTip(QCoreApplication.translate("ShoppingListWindow", u"Add a new shopping list.", None))
 #endif // QT_CONFIG(statustip)
+        self.addButton.setText(QCoreApplication.translate("ShoppingListWindow", u"Add", None))
 #if QT_CONFIG(statustip)
-        self.addButton.setStatusTip(QCoreApplication.translate("CategoriesWindow", u"Add a new category.", None))
+        self.cancelButton.setStatusTip(QCoreApplication.translate("ShoppingListWindow", u"Cancel the addition and reset the fields.", None))
 #endif // QT_CONFIG(statustip)
-        self.addButton.setText(QCoreApplication.translate("CategoriesWindow", u"Add", None))
-#if QT_CONFIG(statustip)
-        self.cancelButton.setStatusTip(QCoreApplication.translate("CategoriesWindow", u"Cancel the addition and reset the fields.", None))
-#endif // QT_CONFIG(statustip)
-        self.cancelButton.setText(QCoreApplication.translate("CategoriesWindow", u"Cancel", None))
+        self.cancelButton.setText(QCoreApplication.translate("ShoppingListWindow", u"Cancel", None))
     # retranslateUi
 

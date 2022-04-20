@@ -45,7 +45,7 @@
            <string>CAUTION: The selected category will be deleted.</string>
           </property>
           <property name="text">
-           <string>Delete seleced category</string>
+           <string>Delete selected category</string>
           </property>
          </widget>
         </item>
@@ -56,7 +56,7 @@
     <item>
      <widget class="QGroupBox" name="groupBox">
       <property name="title">
-       <string>GroupBox</string>
+       <string>Add category</string>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
