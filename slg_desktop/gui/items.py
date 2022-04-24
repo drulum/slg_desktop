@@ -26,7 +26,9 @@ class ItemsWindow(QMainWindow, Ui_ItemsWindow):
         self.addButton.clicked.connect(self.add_item)
         self.cancelButton.clicked.connect(self.cancel_add)
         self.deleteButton.clicked.connect(self.delete)
+
         self.model = QSqlRelationalTableModel(db=db)
+        self.model.setJoinMode(QSqlRelationalTableModel.LeftJoin)
         self.model.setTable('item')
         self.model.setRelation(1, QSqlRelation('brand', 'id', 'name'))
         self.model.setRelation(2, QSqlRelation('category', 'id', 'name'))
@@ -39,28 +41,25 @@ class ItemsWindow(QMainWindow, Ui_ItemsWindow):
         self.itemView.hideColumn(0)
         header = self.itemView.horizontalHeader()
         header.setSectionResizeMode(QHeaderView.Stretch)
-        self.model.select()
 
         self.brands_model = QSqlTableModel(db=db)
         self.brands_model.setTable('brand')
         self.brands_model.setSort(1, Qt.AscendingOrder)
         self.brandBox.setModel(self.brands_model)
         self.brandBox.setModelColumn(1)
-        self.brands_model.select()
 
         self.categories_model = QSqlTableModel(db=db)
         self.categories_model.setTable('category')
         self.categories_model.setSort(1, Qt.AscendingOrder)
         self.categoryBox.setModel(self.categories_model)
         self.categoryBox.setModelColumn(1)
-        self.categories_model.select()
 
     def add_item(self):
         record = self.model.record()
-        pk = self.brandBox.model().index(self.brandBox.currentIndex(), 0, self.brandBox.rootModelIndex())
-        record.setValue('brand_id', pk.data())
-        pk = self.categoryBox.model().index(self.categoryBox.currentIndex(), 0, self.categoryBox.rootModelIndex())
-        record.setValue('category_id', pk.data())
+        brand_pk = self.brandBox.model().index(self.brandBox.currentIndex(), 0, self.brandBox.rootModelIndex())
+        record.setValue(1, brand_pk.data())
+        category_pk = self.categoryBox.model().index(self.categoryBox.currentIndex(), 0, self.categoryBox.rootModelIndex())
+        record.setValue(2, category_pk.data())
         record.setValue('name', self.itemEdit.text())
         record.setValue('size', self.sizeEdit.text())
         record.setValue('expected_cost', self.costEdit.text())
@@ -68,16 +67,19 @@ class ItemsWindow(QMainWindow, Ui_ItemsWindow):
         self.model.select()
         self.cancel_add()
 
-        self.refresh_comboboxes()
+        self.refresh_data()
 
-    def refresh_comboboxes(self):
+    def refresh_data(self):
+        self.model.select()
+        self.model.relationModel(1).select()
+        self.model.relationModel(2).select()
         self.brands_model.select()
         self.categories_model.select()
         self.brandBox.setCurrentIndex(-1)
         self.categoryBox.setCurrentIndex(-1)
 
     def cancel_add(self):
-        self.refresh_comboboxes()
+        self.refresh_data()
         self.itemEdit.setText('')
         self.sizeEdit.setText('')
         self.costEdit.setText('')
@@ -87,7 +89,7 @@ class ItemsWindow(QMainWindow, Ui_ItemsWindow):
         if index:
             self.model.removeRow(index.row())
             self.model.select()
-            self.refresh_comboboxes()
+            self.refresh_data()
 
     def item_change(self):
         if self.itemEdit.text():
@@ -98,6 +100,6 @@ class ItemsWindow(QMainWindow, Ui_ItemsWindow):
             self.cancelButton.setEnabled(False)
 
     def showEvent(self, event):
-        self.refresh_comboboxes()
+        self.refresh_data()
         return super().showEvent(event)
 
