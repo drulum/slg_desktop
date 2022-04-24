@@ -108,7 +108,11 @@
              </widget>
             </item>
             <item>
-             <widget class="QSpinBox" name="quantityBox"/>
+             <widget class="QSpinBox" name="quantityBox">
+              <property name="minimum">
+               <number>1</number>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QLabel" name="label_3">
@@ -139,6 +143,9 @@
             </item>
             <item>
              <widget class="QPushButton" name="addButton">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="text">
                <string>Add</string>
               </property>
@@ -146,6 +153,9 @@
             </item>
             <item>
              <widget class="QPushButton" name="cancelButton">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="text">
                <string>Cancel</string>
               </property>

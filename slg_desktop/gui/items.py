@@ -66,7 +66,6 @@ class ItemsWindow(QMainWindow, Ui_ItemsWindow):
         self.model.insertRecord(-1, record)
         self.model.select()
         self.cancel_add()
-
         self.refresh_data()
 
     def refresh_data(self):

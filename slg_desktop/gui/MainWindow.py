@@ -94,6 +94,7 @@ class Ui_MainWindow(object):
 
         self.quantityBox = QSpinBox(self.groupBox_3)
         self.quantityBox.setObjectName(u"quantityBox")
+        self.quantityBox.setMinimum(1)
 
         self.horizontalLayout_4.addWidget(self.quantityBox)
 
@@ -118,11 +119,13 @@ class Ui_MainWindow(object):
 
         self.addButton = QPushButton(self.groupBox_3)
         self.addButton.setObjectName(u"addButton")
+        self.addButton.setEnabled(False)
 
         self.horizontalLayout_3.addWidget(self.addButton)
 
         self.cancelButton = QPushButton(self.groupBox_3)
         self.cancelButton.setObjectName(u"cancelButton")
+        self.cancelButton.setEnabled(False)
 
         self.horizontalLayout_3.addWidget(self.cancelButton)
 
