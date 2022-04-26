@@ -20,6 +20,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     column_titles = {
         'item_id': 'Item',
         'quantity': 'Quantity',
+        'notes': 'Notes',
         'store_id': 'Store'
     }
 
@@ -38,19 +39,26 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.itemsButton.clicked.connect(self.items_button)
         self.refreshButton.clicked.connect(self.refresh_data)
 
+        self.shoppinglistBox.currentIndexChanged.connect(self.date_changed)
+        self.itemBox.currentIndexChanged.connect(self.item_change)
+        self.addButton.clicked.connect(self.add_shopping_item)
+        self.cancelButton.clicked.connect(self.clear_input)
+        self.removeButton.clicked.connect(self.delete)
+
         self.model = QSqlRelationalTableModel(db=db)
         self.model.setJoinMode(QSqlRelationalTableModel.LeftJoin)
         self.model.setTable('shopping_list_item')
-        self.model.setRelation(0, QSqlRelation('shopping_list', 'id', 'for_date'))
-        self.model.setRelation(1, QSqlRelation('item', 'id', 'name'))
-        self.model.setRelation(3, QSqlRelation('store', 'id', 'name'))
-        self.model.setSort(1, Qt.AscendingOrder)
+        self.model.setRelation(1, QSqlRelation('shopping_list', 'id', 'for_date'))
+        self.model.setRelation(2, QSqlRelation('item', 'id', 'name'))
+        self.model.setRelation(5, QSqlRelation('store', 'id', 'name'))
+        self.model.setSort(2, Qt.AscendingOrder)
         for original, replacement in self.column_titles.items():
             index = self.model.fieldIndex(original)
             self.model.setHeaderData(index, Qt.Horizontal, replacement)
         self.itemlistView.setModel(self.model)
         self.itemlistView.setItemDelegate(QSqlRelationalDelegate(self.itemlistView))
         self.itemlistView.hideColumn(0)
+        self.itemlistView.hideColumn(1)
         header = self.itemlistView.horizontalHeader()
         header.setSectionResizeMode(QHeaderView.Stretch)
 
@@ -74,19 +82,65 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         stores_tableview.hideColumn(0)
         stores_tableview.horizontalHeader().setVisible(False)
         stores_tableview.verticalHeader().setVisible(False)
-        stores_tableview.resizeColumnsToContents()
+        stores_tableview_header = stores_tableview.horizontalHeader()
+        stores_tableview_header.setSectionResizeMode(QHeaderView.ResizeToContents)
+        stores_tableview_header.setStretchLastSection(True)
         self.storeBox.setModel(self.stores_model)
         self.storeBox.setView(stores_tableview)
         self.storeBox.setModelColumn(1)
+
+    def add_shopping_item(self):
+        record = self.model.record()
+        date_pk = self.shoppinglistBox.model().index(self.shoppinglistBox.currentIndex(), 0, self.shoppinglistBox.rootModelIndex())
+        item_pk = self.itemBox.model().index(self.itemBox.currentIndex(), 0, self.itemBox.rootModelIndex())
+        store_pk = self.storeBox.model().index(self.storeBox.currentIndex(), 0, self.storeBox.rootModelIndex())
+        record.setValue(1, date_pk.data())
+        record.setValue(2, item_pk.data())
+        record.setValue('quantity', self.quantityBox.value())
+        record.setValue('notes', self.notesTextEdit.toPlainText())
+        record.setValue(5, store_pk.data())
+        self.model.insertRecord(-1, record)
+        self.model.select()
+        self.clear_input()
+
+    def clear_input(self):
+        self.itemBox.setCurrentIndex(-1)
+        self.quantityBox.setValue(1)
+        self.storeBox.setCurrentIndex(-1)
+        self.notesTextEdit.setPlainText('')
+
+    def date_changed(self):
+        index = self.shoppinglistBox.model().index(self.shoppinglistBox.currentIndex(), 0, self.shoppinglistBox.rootModelIndex())
+        if index:
+            self.model.setFilter(f'shopping_list_id = {index.data()}')
+        pass
+
+    def delete(self):
+        index = self.itemlistView.currentIndex()
+        if index:
+            self.model.removeRow(index.row())
+            self.model.select()
+
+    def item_change(self):
+        if self.itemBox.currentText():
+            self.quantityBox.setEnabled(True)
+            self.storeBox.setEnabled(True)
+            self.notesTextEdit.setEnabled(True)
+            self.addButton.setEnabled(True)
+            self.cancelButton.setEnabled(True)
+        else:
+            self.quantityBox.setEnabled(False)
+            self.storeBox.setEnabled(False)
+            self.notesTextEdit.setEnabled(False)
+            self.addButton.setEnabled(False)
+            self.cancelButton.setEnabled(False)
 
     def refresh_data(self):
         self.model.select()
         self.dates_model.select()
         self.items_model.select()
         self.stores_model.select()
-
-    def date_changed(self):
-        self.model.setFilter('shopping_list_id = 1')
+        self.clear_input()
 
     def shopping_list_button(self):
         self.shopping_list_window.show()

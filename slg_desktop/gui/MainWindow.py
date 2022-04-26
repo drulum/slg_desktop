@@ -17,14 +17,15 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QComboBox, QGroupBox, QHBoxLayout,
     QHeaderView, QLabel, QMainWindow, QMenuBar,
-    QPushButton, QSizePolicy, QSpacerItem, QSpinBox,
-    QStatusBar, QTableView, QVBoxLayout, QWidget)
+    QPlainTextEdit, QPushButton, QSizePolicy, QSpacerItem,
+    QSpinBox, QStatusBar, QTableView, QVBoxLayout,
+    QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.resize(800, 800)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout = QVBoxLayout(self.centralwidget)
@@ -37,6 +38,11 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.shoppinglistBox = QComboBox(self.groupBox)
         self.shoppinglistBox.setObjectName(u"shoppinglistBox")
+        sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.shoppinglistBox.sizePolicy().hasHeightForWidth())
+        self.shoppinglistBox.setSizePolicy(sizePolicy)
 
         self.horizontalLayout_2.addWidget(self.shoppinglistBox)
 
@@ -73,6 +79,8 @@ class Ui_MainWindow(object):
 
         self.groupBox_3 = QGroupBox(self.groupBox)
         self.groupBox_3.setObjectName(u"groupBox_3")
+        sizePolicy.setHeightForWidth(self.groupBox_3.sizePolicy().hasHeightForWidth())
+        self.groupBox_3.setSizePolicy(sizePolicy)
         self.verticalLayout_3 = QVBoxLayout(self.groupBox_3)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.horizontalLayout_4 = QHBoxLayout()
@@ -84,6 +92,11 @@ class Ui_MainWindow(object):
 
         self.itemBox = QComboBox(self.groupBox_3)
         self.itemBox.setObjectName(u"itemBox")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.itemBox.sizePolicy().hasHeightForWidth())
+        self.itemBox.setSizePolicy(sizePolicy1)
 
         self.horizontalLayout_4.addWidget(self.itemBox)
 
@@ -94,6 +107,7 @@ class Ui_MainWindow(object):
 
         self.quantityBox = QSpinBox(self.groupBox_3)
         self.quantityBox.setObjectName(u"quantityBox")
+        self.quantityBox.setEnabled(False)
         self.quantityBox.setMinimum(1)
 
         self.horizontalLayout_4.addWidget(self.quantityBox)
@@ -105,11 +119,23 @@ class Ui_MainWindow(object):
 
         self.storeBox = QComboBox(self.groupBox_3)
         self.storeBox.setObjectName(u"storeBox")
+        self.storeBox.setEnabled(False)
+        sizePolicy1.setHeightForWidth(self.storeBox.sizePolicy().hasHeightForWidth())
+        self.storeBox.setSizePolicy(sizePolicy1)
 
         self.horizontalLayout_4.addWidget(self.storeBox)
 
 
         self.verticalLayout_3.addLayout(self.horizontalLayout_4)
+
+        self.notesTextEdit = QPlainTextEdit(self.groupBox_3)
+        self.notesTextEdit.setObjectName(u"notesTextEdit")
+        self.notesTextEdit.setEnabled(False)
+        sizePolicy1.setHeightForWidth(self.notesTextEdit.sizePolicy().hasHeightForWidth())
+        self.notesTextEdit.setSizePolicy(sizePolicy1)
+        self.notesTextEdit.setMaximumSize(QSize(16777215, 50))
+
+        self.verticalLayout_3.addWidget(self.notesTextEdit)
 
         self.horizontalLayout_3 = QHBoxLayout()
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
@@ -212,6 +238,7 @@ class Ui_MainWindow(object):
         self.label.setText(QCoreApplication.translate("MainWindow", u"Item to add", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Quantity", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"From store", None))
+        self.notesTextEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type notes on this item here e.g. \"Only buy if less than \u00a3x.xx\"", None))
         self.addButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.cancelButton.setText(QCoreApplication.translate("MainWindow", u"Cancel", None))
         self.groupBox_2.setTitle(QCoreApplication.translate("MainWindow", u"Management", None))

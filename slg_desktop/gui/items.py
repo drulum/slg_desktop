@@ -24,7 +24,7 @@ class ItemsWindow(QMainWindow, Ui_ItemsWindow):
         self.setupUi(self)
         self.itemEdit.textChanged.connect(self.item_change)
         self.addButton.clicked.connect(self.add_item)
-        self.cancelButton.clicked.connect(self.cancel_add)
+        self.cancelButton.clicked.connect(self.clear_input)
         self.deleteButton.clicked.connect(self.delete)
 
         self.model = QSqlRelationalTableModel(db=db)
@@ -64,9 +64,7 @@ class ItemsWindow(QMainWindow, Ui_ItemsWindow):
         record.setValue('size', self.sizeEdit.text())
         record.setValue('expected_cost', self.costEdit.text())
         self.model.insertRecord(-1, record)
-        self.model.select()
-        self.cancel_add()
-        self.refresh_data()
+        self.clear_input()
 
     def refresh_data(self):
         self.model.select()
@@ -74,21 +72,20 @@ class ItemsWindow(QMainWindow, Ui_ItemsWindow):
         self.model.relationModel(2).select()
         self.brands_model.select()
         self.categories_model.select()
-        self.brandBox.setCurrentIndex(-1)
-        self.categoryBox.setCurrentIndex(-1)
 
-    def cancel_add(self):
+    def clear_input(self):
         self.refresh_data()
         self.itemEdit.setText('')
         self.sizeEdit.setText('')
         self.costEdit.setText('')
+        self.brandBox.setCurrentIndex(-1)
+        self.categoryBox.setCurrentIndex(-1)
 
     def delete(self):
         index = self.itemView.currentIndex()
         if index:
             self.model.removeRow(index.row())
-            self.model.select()
-            self.refresh_data()
+            self.clear_input()
 
     def item_change(self):
         if self.itemEdit.text():
@@ -99,6 +96,6 @@ class ItemsWindow(QMainWindow, Ui_ItemsWindow):
             self.cancelButton.setEnabled(False)
 
     def showEvent(self, event):
-        self.refresh_data()
+        self.clear_input()
         return super().showEvent(event)
 
