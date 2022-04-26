@@ -11,6 +11,9 @@ class ShoppingList(Base):
 
     id = Column(Integer, primary_key=True)
     for_date = Column(Date, nullable=False)  # TODO: make field unique
+
+    shopping_list_items = relationship('ShoppingListItem', 'shopping_list')
+
     def __repr__(self) -> str:
         return f'Shopping list(id={self.id!r}, for_date={self.for_date!r})'
 
@@ -21,6 +24,7 @@ class Store(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
     location = Column(String)
+    shopping_list_items = relationship('ShoppingListItem', 'store')
 
     def __repr__(self) -> str:
         return f'Store(id={self.id!r}, name={self.name!r}, location={self.location!r})'
@@ -62,6 +66,7 @@ class Item(Base):
 
     brand = relationship('Brand', back_populates='items')
     category = relationship('Category', back_populates='items')
+    shopping_list_items = relationship('ShoppingListItem', 'item')
 
     def __repr__(self) -> str:
         return f'Item(id={self.id!r}, name={self.name!r}, size={self.size!r}, expected_cost={self.expected_cost!r})'
@@ -70,11 +75,17 @@ class Item(Base):
 class ShoppingListItem(Base):
     __tablename__ = 'shopping_list_item'
 
-    shopping_list_id = Column(Integer, ForeignKey('shopping_list.id'), primary_key=True)
-    item_id = Column(Integer, ForeignKey('item.id'), primary_key=True)
+    id = Column(Integer, primary_key=True)
+    shopping_list_id = Column(Integer, ForeignKey('shopping_list.id'))
+    item_id = Column(Integer, ForeignKey('item.id'))
     quantity = Column(Integer)
+    notes = Column(String, nullable=True)
     store_id = Column(Integer, ForeignKey('store.id'))
 
+    shopping_list = relationship('ShoppingList', back_populates='shoppinglistitems')
+    item = relationship('Item', back_populates='shoppinglistitems')
+    store = relationship('Store', back_populates='shoppinglistitems')
+    
     # TODO: add a __repr__ method that makes sense
     # def __repr__(self) -> str:
     #     return ''
