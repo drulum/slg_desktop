@@ -2,6 +2,8 @@ from PySide6.QtCore import Qt
 from PySide6.QtSql import QSqlDatabase, QSqlRelation, QSqlRelationalDelegate, QSqlRelationalTableModel, QSqlTableModel
 from PySide6.QtWidgets import QHeaderView, QMainWindow, QTableView
 
+from export import Export
+
 from gui.MainWindow import Ui_MainWindow
 
 from gui.brands import BrandsWindow
@@ -24,6 +26,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         'store_id': 'Store'
     }
 
+    delivery_options = {
+        'Email': 'email',
+        'Save': 'save',
+    }
+    format_options = {
+        'CSV': 'csv',
+        'JSON': 'json',
+    }
+
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -44,6 +55,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.addButton.clicked.connect(self.add_shopping_item)
         self.cancelButton.clicked.connect(self.clear_input)
         self.removeButton.clicked.connect(self.delete)
+
+        self.formatBox.addItems(list(self.format_options.keys()))
+        self.deliveryBox.addItems(list(self.delivery_options.keys()))
+        self.exportButton.clicked.connect(self.export_list)
 
         self.model = QSqlRelationalTableModel(db=db)
         self.model.setJoinMode(QSqlRelationalTableModel.LeftJoin)
@@ -120,6 +135,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if index:
             self.model.removeRow(index.row())
             self.model.select()
+
+    def export_list(self):
+        list_pk = self.shoppinglistBox.model().index(self.shoppinglistBox.currentIndex(), 0, self.shoppinglistBox.rootModelIndex()).data()
+        export_delivery = self.delivery_options[self.deliveryBox.currentText()]
+        output = Export(list_pk, export_delivery)
+        export_format = getattr(output, self.format_options[self.formatBox.currentText()])
+        export_format()
 
     def item_change(self):
         if self.itemBox.currentText():

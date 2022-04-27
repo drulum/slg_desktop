@@ -65,6 +65,31 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_5 = QHBoxLayout()
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.label_4 = QLabel(self.groupBox)
+        self.label_4.setObjectName(u"label_4")
+
+        self.horizontalLayout_5.addWidget(self.label_4)
+
+        self.formatBox = QComboBox(self.groupBox)
+        self.formatBox.setObjectName(u"formatBox")
+
+        self.horizontalLayout_5.addWidget(self.formatBox)
+
+        self.label_5 = QLabel(self.groupBox)
+        self.label_5.setObjectName(u"label_5")
+
+        self.horizontalLayout_5.addWidget(self.label_5)
+
+        self.deliveryBox = QComboBox(self.groupBox)
+        self.deliveryBox.setObjectName(u"deliveryBox")
+
+        self.horizontalLayout_5.addWidget(self.deliveryBox)
+
+        self.exportButton = QPushButton(self.groupBox)
+        self.exportButton.setObjectName(u"exportButton")
+
+        self.horizontalLayout_5.addWidget(self.exportButton)
+
         self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout_5.addItem(self.horizontalSpacer_3)
@@ -233,6 +258,9 @@ class Ui_MainWindow(object):
         self.refreshButton.setStatusTip(QCoreApplication.translate("MainWindow", u"Click this if you make any changes in the 'Management' section!", None))
 #endif // QT_CONFIG(statustip)
         self.refreshButton.setText(QCoreApplication.translate("MainWindow", u"Refresh data", None))
+        self.label_4.setText(QCoreApplication.translate("MainWindow", u"Format", None))
+        self.label_5.setText(QCoreApplication.translate("MainWindow", u"Delivery", None))
+        self.exportButton.setText(QCoreApplication.translate("MainWindow", u"Export", None))
         self.removeButton.setText(QCoreApplication.translate("MainWindow", u"Remove item from list", None))
         self.groupBox_3.setTitle(QCoreApplication.translate("MainWindow", u"Add item to list", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Item to add", None))
