@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'mainwindow.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.2.3
+## Created by: Qt User Interface Compiler version 6.5.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -43,6 +43,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.shoppinglistBox.sizePolicy().hasHeightForWidth())
         self.shoppinglistBox.setSizePolicy(sizePolicy)
+        self.shoppinglistBox.setSizeAdjustPolicy(QComboBox.AdjustToContents)
 
         self.horizontalLayout_2.addWidget(self.shoppinglistBox)
 
@@ -72,6 +73,7 @@ class Ui_MainWindow(object):
 
         self.formatBox = QComboBox(self.groupBox)
         self.formatBox.setObjectName(u"formatBox")
+        self.formatBox.setSizeAdjustPolicy(QComboBox.AdjustToContents)
 
         self.horizontalLayout_5.addWidget(self.formatBox)
 
@@ -82,6 +84,7 @@ class Ui_MainWindow(object):
 
         self.deliveryBox = QComboBox(self.groupBox)
         self.deliveryBox.setObjectName(u"deliveryBox")
+        self.deliveryBox.setSizeAdjustPolicy(QComboBox.AdjustToContents)
 
         self.horizontalLayout_5.addWidget(self.deliveryBox)
 
@@ -122,6 +125,7 @@ class Ui_MainWindow(object):
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.itemBox.sizePolicy().hasHeightForWidth())
         self.itemBox.setSizePolicy(sizePolicy1)
+        self.itemBox.setSizeAdjustPolicy(QComboBox.AdjustToContents)
 
         self.horizontalLayout_4.addWidget(self.itemBox)
 
@@ -147,6 +151,7 @@ class Ui_MainWindow(object):
         self.storeBox.setEnabled(False)
         sizePolicy1.setHeightForWidth(self.storeBox.sizePolicy().hasHeightForWidth())
         self.storeBox.setSizePolicy(sizePolicy1)
+        self.storeBox.setSizeAdjustPolicy(QComboBox.AdjustToContents)
 
         self.horizontalLayout_4.addWidget(self.storeBox)
 

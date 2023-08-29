@@ -98,4 +98,3 @@ class ItemsWindow(QMainWindow, Ui_ItemsWindow):
     def showEvent(self, event):
         self.clear_input()
         return super().showEvent(event)
-

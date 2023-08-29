@@ -182,4 +182,3 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def showEvent(self, event):
         self.refresh_data()
         return super().showEvent(event)
-

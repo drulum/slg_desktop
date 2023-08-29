@@ -56,4 +56,3 @@ class StoresWindow(QMainWindow, Ui_StoresWindow):
             self.addButton.setEnabled(False)
             self.cancelButton.setEnabled(False)
             self.locationEdit.setEnabled(False)
-

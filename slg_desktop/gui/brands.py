@@ -51,4 +51,3 @@ class BrandsWindow(QMainWindow, Ui_BrandsWindow):
         else:
             self.addButton.setEnabled(False)
             self.cancelButton.setEnabled(False)
-

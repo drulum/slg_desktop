@@ -51,5 +51,3 @@ class CategoriesWindow(QMainWindow, Ui_CategoriesWindow):
         else:
             self.addButton.setEnabled(False)
             self.cancelButton.setEnabled(False)
-
-

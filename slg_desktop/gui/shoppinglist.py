@@ -51,4 +51,3 @@ class ShoppingListWindow(QMainWindow, Ui_ShoppingListWindow):
     def shopping_list_change(self):
         self.addButton.setEnabled(True)
         self.cancelButton.setEnabled(True)
-
