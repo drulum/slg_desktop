@@ -24,9 +24,15 @@ class Database:
                     case 'brand':
                         record = Brand(name=data['brand'])
                     case 'item':
-                        record = Item(name=data['item'], brand_id=data['brand'], size=data['size'], expected_cost=data['cost'])
+                        record = Item(name=data['item'],
+                                      brand_id=data['brand'],
+                                      size=data['size'],
+                                      expected_cost=data['cost'])
                     case 'shopping_list_item':
-                        record = ShoppingListItem(shopping_list_id=data['list'], item_id=data['item'], quantity=data['quantity'], store_id=data['store'])
+                        record = ShoppingListItem(shopping_list_id=data['list'],
+                                                  item_id=data['item'],
+                                                  quantity=data['quantity'],
+                                                  store_id=data['store'])
                     case _:
                         # TODO: change to something more useful
                         print('The table supplied does not exist.')
@@ -80,7 +86,6 @@ class Database:
             print(f'The following data was not provided: {err}')
             return
 
-
     def delete(self, data):
         try:
             with Session(self.engine) as session:
@@ -104,4 +109,3 @@ class Database:
         except KeyError as err:
             # TODO: change to something more useful
             print(f'The following data was not provided: {err}')
-
