@@ -33,4 +33,3 @@ class ShoppingListGenerator:
 
 if __name__ == '__main__':
     slg = ShoppingListGenerator()
-

@@ -1,7 +1,7 @@
 import os
-import smtplib
-import ssl
-from email.message import EmailMessage
+# import smtplib
+# import ssl
+# from email.message import EmailMessage
 
 
 class Export:
@@ -15,15 +15,10 @@ class Export:
         deliver()
 
     def email(self):
-        email_config = {}
-        email_config['host'] = os.getenv('SLG_EMAIL_HOST')
-        email_config['port'] = os.getenv('SLG_EMAIL_PORT')
-        email_config['user'] = os.getenv('SLG_EMAIL_USER')
-        email_config['pass'] = os.getenv('SLG_EMAIL_PASS')
-        email_config['from'] = os.getenv('SLG_EMAIL_FROM')
-        email_config['to'] = os.getenv('SLG_EMAIL_TO')
-        email_config['subject'] = os.getenv('SLG_EMAIL_SUBJECT')
-        email_config['message'] = os.getenv('SLG_EMAIL_MESSAGE')
+        email_config = {'host': os.getenv('SLG_EMAIL_HOST'), 'port': os.getenv('SLG_EMAIL_PORT'),
+                        'user': os.getenv('SLG_EMAIL_USER'), 'pass': os.getenv('SLG_EMAIL_PASS'),
+                        'from': os.getenv('SLG_EMAIL_FROM'), 'to': os.getenv('SLG_EMAIL_TO'),
+                        'subject': os.getenv('SLG_EMAIL_SUBJECT'), 'message': os.getenv('SLG_EMAIL_MESSAGE')}
         # data_file = None  # This will be supplied by the csv or json methods
         # context = ssl.create_default_context()
         # with smtplib.SMTP_SSL(email_config['host'], email_config['port'], context=context) as server:
@@ -43,4 +38,3 @@ class Export:
 
     def save(self):
         print('Nothing to save yet.')
-
