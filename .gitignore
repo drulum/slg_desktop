@@ -2,6 +2,7 @@
 *sqlite3*
 tags*
 .env
+/slg_desktop/data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
